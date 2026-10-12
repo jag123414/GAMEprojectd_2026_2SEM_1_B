@@ -35,4 +35,10 @@ public class PickupItem : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public string GetItemName()
+    {
+        return itemName;
+    }
+
+}
 

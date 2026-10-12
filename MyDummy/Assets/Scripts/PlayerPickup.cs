@@ -86,8 +86,3 @@ public class PlayerPickup : MonoBehaviour
     }
 
 }
-
-
-}
-
-
