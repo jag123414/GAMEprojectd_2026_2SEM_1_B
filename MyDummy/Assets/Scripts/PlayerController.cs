@@ -113,9 +113,29 @@ public class PlayerController : MonoBehaviour
         controller.Move(Vector3.up * verticalVelocity * Time.deltaTime);
     }
 
-    // ↓ 외부(PlayerPickup)에서 호출할 수 있도록 ChangeState 함수를 추가했습니다.
+    // 이미지 내용에 맞춰 수정한 ChangeState 함수입니다.
     public void ChangeState(PlayerState newState)
     {
         currentState = newState;
+
+        if (currentState != PlayerState.Normal)
+        {
+            animator.SetFloat("speed", 0);
+        }
+
+        Debug.Log("현재 상태 : " + currentState);
+    }
+
+    // 💡 [새로 추가됨] 아이템과 부딪혔을 때 자동으로 먹어지게 하는 함수
+    private void OnTriggerEnter(Collider other)
+    {
+        // 부딪힌 오브젝트에서 PickupItem 컴포넌트를 가져옵니다.
+        PickupItem item = other.GetComponent<PickupItem>();
+
+        // 아이템이 맞다면 획득 처리(Collect)를 호출합니다.
+        if (item != null)
+        {
+            item.Collect();
+        }
     }
 }
